@@ -251,7 +251,7 @@ $$
 **Onde:**
 
 * Número de sucessos desejados = 100 grupos com a composição (7 homens);
-* Probabilidade de sucesso por tentativa = 0{,}26682793
+* Probabilidade de sucesso por tentativa = 0,26682793
   (calculada anteriormente com a Distribuição Binomial: $n = 10$, $k = 7$, $p = 0{,}70$)
 
 ### Resultado
@@ -297,11 +297,6 @@ $$n = \frac{Z^2 \cdot S^2}{E^2}$$
 
 $$n = \frac{1.96^2 \cdot 3139.89^2}{196.42^2} \approx \textbf{983 entrevistas}$$
 
-
-### Viabilidade
-
-O projeto é viável:
-
 ### ✅ Viabilidade
 
 O projeto é viável:
@@ -311,13 +306,65 @@ O projeto é viável:
 
 ---
 
+### 🧾 Análise de Sensibilidade: Variações no Nível de Confiança
+
+Foram realizados cálculos considerando diferentes níveis de confiança para entender o impacto no tamanho da amostra e nos custos do estudo. A margem de erro foi mantida em 10% da média amostral.
+
+#### 📌 Resultados Obtidos
+
+| Nível de Confiança | Valor de Z | Tamanho da Amostra Estimada | Custo Estimado |
+| ------------------ | ---------- | --------------------------- | -------------- |
+| 90%                | 1,64       | 811 entrevistas             | R\$ 81.100,00  |
+| 95%                | 1,96       | 983 entrevistas             | R\$ 98.300,00  |
+| 99%                | 2,58       | 1.317 entrevistas           | R\$ 131.700,00 |
+
+Observa-se que, à medida que o nível de confiança aumenta, também aumenta o tamanho necessário da amostra — o que eleva o custo da pesquisa.
+
+---
+
+### 💸 Análise de Custo vs. Margem de Erro
+
+Também foi realizada uma simulação considerando a utilização total do orçamento disponível (R\$ 150.000,00), a fim de verificar qual seria a nova **margem de erro alcançável** mantendo o nível de confiança em 95%.
+
+* Número máximo de entrevistas possível com o orçamento: **1.500**
+* Margem de erro estimada com 1.500 entrevistas: **7,94%**
+
+🔍 **Interpretação:** Com o orçamento atual, é possível reduzir a margem de erro de 10% para cerca de **8%**, mantendo o nível de confiança de 95%.
+
+---
+
+### 🎯 Reestimativa para uma Margem de Erro de 5%
+
+Caso o cliente deseje uma **margem de erro menor**, como 5%, mantendo o nível de confiança em 95%, é necessário um novo dimensionamento da amostra:
+
+* Nova margem de erro: R\$ 98,21 (5% da média)
+* Amostra necessária: **3.933 entrevistas**
+* Custo estimado: **R\$ 393.300,00**
+
+⚠️ **Conclusão:** Esse cenário **não é viável** com o orçamento atual de R\$ 150.000,00.
+
+---
+
 ## 🧠 Conclusões Gerais
 
-- A **distribuição de renda** evidenciou **alta assimetria à direita**, com forte concentração em faixas de valores baixos. A média elevada, influenciada por outliers, não representa adequadamente a condição da maioria da população analisada.  
-- As **desigualdades mais acentuadas** ocorrem nas interseções de **gênero e cor/raça**, com **mulheres pretas e pardas** ocupando as posições de maior vulnerabilidade socioeconômica.  
-- As **regiões Sudeste e Centro-Oeste**, em especial o **Distrito Federal**, concentram as maiores rendas médias, revelando disparidades econômicas significativas entre as Unidades Federativas.  
-- A **escolaridade demonstra correlação positiva com a renda**, especialmente nos níveis mais elevados. No entanto, **o avanço educacional, por si só, não elimina as desigualdades estruturais** existentes, indicando limitações do capital humano como único vetor de mobilidade.  
-- Por fim, os dados reforçam a necessidade de **políticas públicas que incorporem recortes interseccionais (gênero, raça, região e educação)** para que sejam eficazes no combate à desigualdade social e na promoção de equidade no acesso a oportunidades.
+Este notebook apresentou uma análise estatística completa baseada em dados de chefes de domicílio no Brasil, unindo estatísticas descritivas, inferenciais e probabilísticas para fornecer uma visão integrada da realidade socioeconômica brasileira.
+
+* A **distribuição de renda** mostrou-se **altamente assimétrica à direita**, com forte concentração em faixas de valores baixos. A média, puxada por valores extremos (outliers), não reflete adequadamente a condição da maioria da população.
+
+* As **maiores desigualdades de renda** foram observadas nas interseções entre **gênero e cor/raça**, evidenciando que **mulheres pretas e pardas** estão entre os grupos mais vulneráveis economicamente.
+
+* A **localização geográfica** também impacta significativamente a renda. As **regiões Sudeste e Centro-Oeste**, especialmente o **Distrito Federal**, apresentam as maiores rendas médias, enquanto outras regiões permanecem em desvantagem.
+
+* A **escolaridade** apresenta correlação positiva com a renda, especialmente nos níveis mais elevados. Contudo, o aumento do capital humano, por si só, **não é suficiente para superar desigualdades estruturais**, reforçando a necessidade de ações afirmativas e políticas redistributivas.
+
+* Foram aplicados conceitos da **Distribuição Binomial** para simular a chance de grupos com determinada composição de gênero. Constatou-se que há **26,68% de chance** de um grupo de 10 pessoas conter exatamente 7 homens. Para formar **100 grupos com essa composição**, seriam necessários **375 sorteios**, em média.
+
+* No escopo da **Amostragem Aleatória Simples (AAS)**, foi possível planejar uma pesquisa amostral dentro de um orçamento de R\$ 150.000,00. Com esse recurso, é possível entrevistar até **1.500 pessoas**, o que permite uma **margem de erro de aproximadamente 8%** no nível de confiança de 95%. Para alcançar **10% de erro**, bastariam **983 entrevistas**, e o projeto seria plenamente viável financeiramente e logisticamente.
+
+* Por outro lado, para atingir **5% de margem de erro**, o custo da pesquisa ultrapassaria R\$ 390.000,00 — um cenário **inviável** com os recursos disponíveis.
+
+📌 **Síntese Final:**
+Os resultados reforçam a importância de análises quantitativas para fundamentar decisões políticas e estratégicas. A **combinação entre inferência estatística e análise descritiva** permitiu identificar desigualdades estruturais e simular condições ideais para pesquisas futuras. Os dados apontam para a necessidade de **políticas públicas interseccionais**, que considerem simultaneamente **gênero, raça, região e educação**, como condição fundamental para a promoção da equidade no Brasil.
 
 ---
 
