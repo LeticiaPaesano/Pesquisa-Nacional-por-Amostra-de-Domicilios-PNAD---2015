@@ -2,7 +2,7 @@
 
 Este repositório apresenta uma análise descritiva e exploratória de um subconjunto da **Pesquisa Nacional por Amostra de Domicílios (PNAD) – 2015**, conduzida pelo **IBGE**. O objetivo é aplicar técnicas estatísticas e ferramentas de análise de dados para compreender aspectos sociodemográficos da população brasileira, especialmente das **Pessoas de Referência dos domicílios**.
 
-A análise foi realizada com Python e bibliotecas como `pandas`, `seaborn` e `matplotlib`, seguindo os princípios de clareza, organização e fundamentação estatística.
+A análise foi realizada com Python e bibliotecas como `pandas`, `seaborn` e `matplotlib`, `scipy.stats(binom/norm)`seguindo os princípios de clareza, organização e fundamentação estatística.
 
 ---
 
@@ -13,7 +13,13 @@ A análise foi realizada com Python e bibliotecas como `pandas`, `seaborn` e `ma
 - Visualizar distribuições e comparações entre grupos;
 - Evidenciar desigualdades raciais, de gênero, regionais e educacionais;
 - Consolidar a análise com interpretações técnicas baseadas nos dados.
-
+- Distribuição binomial aplicada à probabilidade de ocorrência de perfis populacionais (ex: chefes de domicílio do sexo masculino);
+- Cálculo da média esperada de eventos;
+- Planejamento de amostragem com base em orçamento, margem de erro e nível de confiança;
+- Estimativa da média populacional;
+- Cálculo da nova margem de erro com base nos recursos disponíveis;
+- Determinação do custo total da pesquisa conforme o nível de confiança.
+  
 ---
 
 ## 🗂️ Estrutura dos Dados
@@ -123,7 +129,7 @@ A distribuição de renda mostra alta concentração de baixa renda (0 - R$5.000
 ### 📦 Boxplot da Renda até 6 mil
 ![Distribuição da Renda (até R$6.000)](https://github.com/user-attachments/assets/7f29ec6b-1ab9-47e4-bf46-63ab98564d54)
 
-O box plot da renda mostra uma distribuição altamente assimétrica: a mediana (R$ 1.200) e a maioria (50% central) concentram-se em baixa renda. A presença de numerosos outliers de alta renda, estendendo-se muito além do corpo principal dos dados, evidencia uma desigualdade estrutural e profunda concentração de renda.
+O boxplot da renda mostra uma distribuição altamente assimétrica: a mediana (R$ 1.200) e a maioria (50% central) concentram-se em baixa renda. A presença de numerosos outliers de alta renda, estendendo-se muito além do corpo principal dos dados, evidencia uma desigualdade estrutural e profunda concentração de renda.
 
 ---
 
@@ -206,6 +212,105 @@ A análise das rendas na Região Centro-Oeste revela persistente desigualdade sa
 
 ---
 
+## 📚 Notbook – Estatística 
+
+### Distribuição Binomial 
+
+A Distribuição Binomial foi utilizada para calcular a probabilidade de que, em um grupo de 10 pessoas sorteadas aleatoriamente, exatamente 7 sejam homens e 3 sejam mulheres.
+
+A fórmula empregada é:
+
+$$P(X=k) = \binom{n}{k} \cdot p^k \cdot (1-p)^{n-k}$$
+
+**Onde:**
+
+* $P(X=k)$: Probabilidade de obter exatamente  $k$  sucessos.
+* $n$: Número total de tentativas (tamanho do grupo).
+* $k$: Número de sucessos desejados (neste caso, o número de homens).
+* $p$: Probabilidade de sucesso em uma única tentativa (probabilidade de ser homem).
+* $\binom{n}{k}$: Coeficiente binomial, que representa o número de combinações de $n$ elementos tomados $k$ a $k$.
+
+### Resultado
+
+Com $n=10$, $k=7$ e $p=0.70$ (70% de chefes de domicílio sendo homens), o cálculo resultou em **0.26682793**.
+
+Portanto, há cerca de **26.68% de chance** de um grupo de 10 pessoas, sorteadas aleatoriamente sob essas condições, conter exatamente 7 homens e 3 mulheres.
+
+---
+
+### Média da Distribuição Binomial
+
+A **Média da Distribuição Binomial** foi utilizada para estimar quantos grupos de 10 pessoas seria necessário sortear, em média, para obter **100 grupos com a composição desejada**: exatamente 7 homens e 3 mulheres por grupo.
+
+A fórmula empregada é:
+
+$$
+\text{Número médio de tentativas} = \frac{\text{Número de sucessos desejados}}{\text{Probabilidade de sucesso por tentativa}}
+$$
+
+**Onde:**
+
+* Número de sucessos desejados = 100 grupos com a composição (7 homens);
+* Probabilidade de sucesso por tentativa = 0{,}26682793
+  (calculada anteriormente com a Distribuição Binomial: $n = 10$, $k = 7$, $p = 0{,}70$)
+
+### Resultado
+
+$$
+\frac{100}{0{,}26682793} \approx 375
+$$
+
+Portanto, **seriam necessários, em média, 375 grupos sorteados** para atingir o objetivo de formar **100 grupos contendo exatamente 7 homens e 3 mulheres**.
+
+---
+
+### Estimativa da Renda Média: AAS 🇧🇷
+
+
+Projeto para estimar a renda média dos chefes de domicílio no Brasil via **Amostragem Aleatória Simples (AAS)**, respeitando limites orçamentários e de prazo.
+
+
+### 📝 Resumo do Projeto
+
+| Parâmetro             |        Detalhe                                          |
+| :---------------------| :------------------------------------------------------ |
+| **Objetivo**          | Estimar a renda média dos chefes de domicílio no Brasil |
+| **Metodologia**       | Amostragem Aleatória Simples (AAS)                      |
+| **Prazo**             | 2 meses                                                 |
+| **Orçamento**         | R\$ 150.000,00                                          |
+| **Custo/Entrevista**  | R\$ 100,00                                              |
+| **Margem de Erro**    | 10% da média                                            |
+| **Nível de Confiança**| 95%                                                     |
+
+### Tamanho da Amostra
+
+Com base em:
+* Média Observada ($\bar{X}$): R\$ 1964,21
+* Desvio Padrão (S): R\$ 3139,89
+* Valor de Z (95% conf.): 1,96
+* Erro (E): 10% de $\bar{X}$ = R\$ 196,42
+
+A fórmula para o tamanho da amostra ($n$) é:
+
+$$n = \frac{Z^2 \cdot S^2}{E^2}$$
+
+
+$$n = \frac{1.96^2 \cdot 3139.89^2}{196.42^2} \approx \textbf{983 entrevistas}$$
+
+
+### Viabilidade
+
+O projeto é viável:
+
+### ✅ Viabilidade
+
+O projeto é viável:
+
+* **Custo:** R$ 98.300,00 (983 ⋅ R$ 100), abaixo do orçamento de R$ 150.000,00.
+* **Prazo:** 983 entrevistas em 2 meses (≈16-17 por dia) é realizável com planejamento.
+
+---
+
 ## 🧠 Conclusões Gerais
 
 - A **distribuição de renda** evidenciou **alta assimetria à direita**, com forte concentração em faixas de valores baixos. A média elevada, influenciada por outliers, não representa adequadamente a condição da maioria da população analisada.  
@@ -216,4 +321,4 @@ A análise das rendas na Região Centro-Oeste revela persistente desigualdade sa
 
 ---
 
-> 📚 *Este notebook é parte das atividades práticas do curso "Estatística com Python: Resumindo e Analisando Dados", da Alura, ministrado pela instrutora Danielle Oliveira.
+> 📚 *Este notebook é parte das atividades práticas dos cursos "Estatística com Python: Resumindo e Analisando Dados", da Alura, ministrado pela instrutora Danielle Oliveira e "Estatística com Python: probabilidade e amostragem" ministrado pelo instrutor: Rodrigo Fernando Dias.
