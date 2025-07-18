@@ -212,7 +212,7 @@ A análise das rendas na Região Centro-Oeste revela persistente desigualdade sa
 
 ---
 
-## 📚 Notbook – Estatística 
+## 📚 Estatística - Notbook 
 
 ### Distribuição Binomial 
 
